@@ -1,0 +1,62 @@
+
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Shopregate</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+      }
+      #status {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 400px;
+      }
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+    <script src="popup.js"></script>
+
+  </head>
+  <body>
+    <div id="search">
+      <form method="get" action="http://shopregate.net76.net/" target="_blank">
+        <div style="border:0px solid black;padding:2px;width:20em;">
+          <table border="0" cellpadding="0">
+            <tr><td>
+              <label>Description</label>
+            </td><td>
+              <input type="text"   name="searchVariable" size="25" maxlength="255" value=""<textarea placeholder="Description"></textarea></tr>
+            <tr>
+              <td><label>Color </label></td>
+              <td><select name="color">
+                <option value=""></option>
+                <option value="red">Red</option>
+                 <option value="green">Green</option>
+                 <option value="blue">Blue</option>
+                 <option value="white">White</option>
+                 <option value="yellow">Yellow</option>
+                 <option value="black">Black</option>
+                 <option value="purple">Purple</option>
+              </select></td>
+            </tr>
+            <tr><td><input type="submit" value="Search" /></td></tr>
+          </table>
+        </div>
+      </form>
+  </body>
+</html>
+
