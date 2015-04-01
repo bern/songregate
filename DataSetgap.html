@@ -142,9 +142,69 @@
       document.getElementById("brID").innerHTML += "<hr>";
       }
     }
+    var AEdataCallback = function(data) {
+      console.log("Data received", data);
+      for (var i = 0; i < 10; i++) {
+      var d = data[i];
+      var itemName;
+      var price;
+      var link;
+      var image;
+      for (var k in d.data) {
+        if(k == "PRODUCTITEMNAME_LINK/_text")
+          itemName = d.data[k];
+          //document.write("<i>" + "Product" + "</i>: " + d.data[k] + "<br />");
+        else if(k == "PRODUCTITEMNAME_LINK")
+          link = d.data[k];
+          //document.write("<a href='" + d.data[k] + "'>" + itemName + "</a>" + "<br />");
+        else if(k == "GRIDPRODIMG_IMAGE")
+          image = d.data[k];
+           //document.write("<img src='" + d.data[k] + "'>" + "<br />");
+         else if(k == "TEXT_1")
+          price = d.data[k];
+          //document.write("Price: " + d.data[k]  + "<br />");
+      }
+      document.getElementById("aeID").innerHTML += "<div class='col-md-12'>";
+      document.getElementById("aeID").innerHTML += "<a href='" + link + "'>" + "<img style='max-height:20em' src='" + image + "'>" + "</a>" + "<br />";
+      document.getElementById("aeID").innerHTML += "<a href='" + link + "'>" + itemName + "</a>" + "<br />";
+      document.getElementById("aeID").innerHTML += "Price: " + price  + "<br />";
+      document.getElementById("aeID").innerHTML += "</div>";
+      document.getElementById("aeID").innerHTML += "<hr>";
+      }
+    }
+    var RLdataCallback = function(data) {
+      console.log("Data received", data);
+      for (var i = 0; i < 10; i++) {
+      var d = data[i];
+      var itemName;
+      var price;
+      var link;
+      var image;
+      for (var k in d.data) {
+        if(k == "PRODUCTITEMNAME_LINK/_text")
+          itemName = d.data[k];
+          //document.write("<i>" + "Product" + "</i>: " + d.data[k] + "<br />");
+        else if(k == "PRODUCTITEMNAME_LINK")
+          link = d.data[k];
+          //document.write("<a href='" + d.data[k] + "'>" + itemName + "</a>" + "<br />");
+        else if(k == "GRIDPRODIMG_IMAGE")
+          image = d.data[k];
+           //document.write("<img src='" + d.data[k] + "'>" + "<br />");
+         else if(k == "TEXT_1")
+          price = d.data[k];
+          //document.write("Price: " + d.data[k]  + "<br />");
+      }
+      document.getElementById("rlID").innerHTML += "<div class='col-md-12'>";
+      document.getElementById("rlID").innerHTML += "<a href='" + link + "'>" + "<img style='max-height:20em' src='" + image + "'>" + "</a>" + "<br />";
+      document.getElementById("rlID").innerHTML += "<a href='" + link + "'>" + itemName + "</a>" + "<br />";
+      document.getElementById("rlID").innerHTML += "Price: " + price  + "<br />";
+      document.getElementById("rlID").innerHTML += "</div>";
+      document.getElementById("rlID").innerHTML += "<hr>";
+      }
+    }
 
     var dataCallback = function(data) {
-      console.log("Data received", data);
+      console.log("Data received", data)
       for (var i = 0; i < 10; i++) {
       var d = data[i];
     for (var k in d.data) {
@@ -204,6 +264,28 @@
       importio.query({
         "connectorGuids": [
           "80cc0cfd-c3ec-4547-ba4a-62424bbf2c4b"
+        ],
+        "input": {
+          "webpage/url": ONsearchURL
+        }
+      }, { "data": ONdataCallback, "done": doneCallback });
+    }
+    var doQuery5 = function(searchVar) {
+      var ONsearchURL = "http://www.ae.com/web/search/index.jsp?Ntt=" + searchVar ;
+      importio.query({
+        "connectorGuids": [
+          "94fcd541-fed5-43f7-900c-7d1b8b4ea4b2"
+        ],
+        "input": {
+          "webpage/url": ONsearchURL
+        }
+      }, { "data": ONdataCallback, "done": doneCallback });
+    }
+    var doQuery6 = function(searchVar) {
+      var ONsearchURL = "http://www.ralphlauren.com/search/index.jsp?kwCatId=&kw=" + searchVar ;
+      importio.query({
+        "connectorGuids": [
+          "243bb2b6-42c9-4f2f-a5ed-92fa6d9404fb"
         ],
         "input": {
           "webpage/url": ONsearchURL
