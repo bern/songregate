@@ -202,9 +202,38 @@
       document.getElementById("rlID").innerHTML += "<hr>";
       }
     }
-
+    var GudataCallback = function(data) {
+      console.log("Data received", data);
+      for (var i = 0; i < 10; i++) {
+      var d = data[i];
+      var itemName;
+      var price;
+      var link;
+      var image;
+      for (var k in d.data) {
+        if(k == "PRODUCTITEMNAME_LINK/_text")
+          itemName = d.data[k];
+          //document.write("<i>" + "Product" + "</i>: " + d.data[k] + "<br />");
+        else if(k == "PRODUCTITEMNAME_LINK")
+          link = d.data[k];
+          //document.write("<a href='" + d.data[k] + "'>" + itemName + "</a>" + "<br />");
+        else if(k == "GRIDPRODIMG_IMAGE")
+          image = d.data[k];
+           //document.write("<img src='" + d.data[k] + "'>" + "<br />");
+         else if(k == "TEXT_1")
+          price = d.data[k];
+          //document.write("Price: " + d.data[k]  + "<br />");
+      }
+      document.getElementById("guID").innerHTML += "<div class='col-md-12'>";
+      document.getElementById("guID").innerHTML += "<a href='" + link + "'>" + "<img style='max-height:20em' src='" + image + "'>" + "</a>" + "<br />";
+      document.getElementById("guID").innerHTML += "<a href='" + link + "'>" + itemName + "</a>" + "<br />";
+      document.getElementById("guID").innerHTML += "Price: " + price  + "<br />";
+      document.getElementById("guID").innerHTML += "</div>";
+      document.getElementById("guID").innerHTML += "<hr>";
+      }
+    }
     var dataCallback = function(data) {
-      console.log("Data received", data)
+      console.log("Data received", data
       for (var i = 0; i < 10; i++) {
       var d = data[i];
     for (var k in d.data) {
@@ -292,7 +321,17 @@
         }
       }, { "data": ONdataCallback, "done": doneCallback });
     }
-
+    var doQuery7 = function(searchVar) {
+      var ONsearchURL = "http://shop.guess.com/en/Catalog/Search/?criteria=" + searchVar ;
+      importio.query({
+        "connectorGuids": [
+          "0f766626-fa48-48da-bec2-6aca8ed64cf7"
+        ],
+        "input": {
+          "webpage/url": ONsearchURL
+        }
+      }, { "data": ONdataCallback, "done": doneCallback });
+    }
   </script>
   <body>
     <script type="text/javascript">var searchVar = "jeans";</script>
